@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>财务运营管理前端</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <h1>财务运营管理系统</h1>
+      <p>字典管理 / 账单管理 / 数据大屏</p>
+    </header>
+
+    <nav class="tabs" aria-label="功能切换">
+      <button class="tab-btn active" data-tab="dictionary">字典管理</button>
+      <button class="tab-btn" data-tab="bills">账单管理</button>
+      <button class="tab-btn" data-tab="dashboard">数据大屏</button>
+    </nav>
+
+    <main>
+      <section id="dictionary" class="tab-panel active">
+        <div class="panel-header">
+          <h2>字典管理</h2>
+          <p>维护业务字典项，供账单录入与统计使用。</p>
+        </div>
+
+        <form id="dictionary-form" class="form-grid">
+          <input type="text" id="dict-code" placeholder="字典编码（如 CAT_TRAVEL）" required />
+          <input type="text" id="dict-name" placeholder="字典名称（如 差旅费）" required />
+          <select id="dict-status">
+            <option value="启用">启用</option>
+            <option value="停用">停用</option>
+          </select>
+          <button type="submit">新增字典项</button>
+        </form>
+
+        <table>
+          <thead>
+            <tr>
+              <th>编码</th>
+              <th>名称</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="dictionary-tbody"></tbody>
+        </table>
+      </section>
+
+      <section id="bills" class="tab-panel">
+        <div class="panel-header">
+          <h2>账单管理</h2>
+          <p>录入、删除与分类查看账单数据。</p>
+        </div>
+
+        <form id="bill-form" class="form-grid bill-grid">
+          <input type="text" id="bill-title" placeholder="账单标题" required />
+          <input type="number" id="bill-amount" min="0" step="0.01" placeholder="金额" required />
+          <input type="date" id="bill-date" required />
+          <select id="bill-category"></select>
+          <select id="bill-type">
+            <option value="支出">支出</option>
+            <option value="收入">收入</option>
+          </select>
+          <button type="submit">新增账单</button>
+        </form>
+
+        <table>
+          <thead>
+            <tr>
+              <th>标题</th>
+              <th>金额</th>
+              <th>日期</th>
+              <th>分类</th>
+              <th>类型</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody id="bill-tbody"></tbody>
+        </table>
+      </section>
+
+      <section id="dashboard" class="tab-panel">
+        <div class="panel-header">
+          <h2>数据大屏</h2>
+          <p>展示账单总览、收支对比与分类占比。</p>
+        </div>
+
+        <div class="kpi-grid">
+          <article class="kpi-card">
+            <h3>收入总额</h3>
+            <p id="kpi-income">¥0.00</p>
+          </article>
+          <article class="kpi-card">
+            <h3>支出总额</h3>
+            <p id="kpi-expense">¥0.00</p>
+          </article>
+          <article class="kpi-card">
+            <h3>净收益</h3>
+            <p id="kpi-net">¥0.00</p>
+          </article>
+          <article class="kpi-card">
+            <h3>账单总数</h3>
+            <p id="kpi-count">0</p>
+          </article>
+        </div>
+
+        <div class="chart-section">
+          <h3>分类支出占比</h3>
+          <div id="category-chart" class="bar-list"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
